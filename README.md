@@ -2,7 +2,9 @@ TUGAS BESAR ANALISIS DATA STSTISTIKA KELOMPOK 11_RA:
 
 1.NAMA ANGGOTA:
 Della Ainisa Fitri (124450095)
+
 Risa Romadona (124450127) 
+
 Najwa Putri Yopu (124450123)
 
 ___________________________________________________________________________________________
@@ -57,6 +59,18 @@ jenis tempat tinggal (Asrama, Kos, Tinggal dengan Orangtua, Kontrakan, dan lainn
 dan data demografis seperti jenis kelamin, tinggi badan, dan pendidikan terakhir. Analisis dilakukan untuk melihat ukuran pemusatan dan
 penyebaran IPK (mean, median, modus, standar deviasi, dan varians), membandingkan IPK berdasarkan jenis tempat tinggal, membuat visualisasi sebagai 
 bentuk eksplorasi data, serta melakukan uji hipotesis (uji-t) untuk mengetahui apakah terdapat perbedaan signifikan antar kelompok tempat tinggal tertentu.
+_____________________________________________________________________________________________________________________________________________________
+
+STRUKTUR REPOSITORY
+data_ads : data yang belum di bersihkan 
+data_11 : data yang sudah di bersihkan 
+code    : script R (kode_11_RA)
+output  : tabel & hasil uji 
+poster  : poster A1 (PDF)
+README.md  : dokumentasi proyek 
+
+
+
 
 
 
