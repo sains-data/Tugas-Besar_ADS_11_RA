@@ -1,0 +1,159 @@
+---
+title: "TUGAS BESAR ADS"
+author: "Kelompok 11"
+date: "2025-11-25"
+output: pdf_document
+---
+
+```{r}
+
+# 1. Load Library
+library(dplyr)
+library(ggplot2)
+library(readr) # Tambahkan readr untuk fungsi read_csv yang lebih baik
+library(RColorBrewer) # Palet warna kekinian
+
+# --- FUNGSI CUSTOM: MENGHITUNG MODUS (MODE) ---
+get_mode <- function(x) {
+  x <- na.omit(x) 
+  if (length(x) == 0) return(NA)
+  uniqv <- unique(round(x, 2))
+  modes <- uniqv[which(tabulate(match(round(x, 2), uniqv)) == max(tabulate(match(round(x, 2), uniqv))))]
+  return(modes[1]) 
+}
+
+# 2. Baca file CSV (Gunakan read_csv)
+# Ganti read.csv dengan read_csv atau tambahkan argumen encoding
+df <- readr::read_csv(
+    "D:/TUGAS SEM 3/ADS/Book1.csv",
+    locale = locale(encoding = "Latin1")
+) 
+df <- readr::read_csv("D:/TUGAS SEM 3/ADS/Book1.csv", locale = locale(encoding = "Latin1"))
+
+# 3. Pembersihan Data dan Tipe Data
+# Kolom diubah ke lowercase dan spasi dihilangkan
+df <- df %>%
+  rename_with(~tolower(gsub(" ", "_", .x))) %>%
+  rename(
+    ipk = matches("ipk"),
+    tempat_tinggal = matches("tinggal|tempat")
+  )
+
+# Pastikan IPK numeric (jika ada koma, read_csv sudah menanganinya, tapi jaga-jaga)
+df$ipk <- gsub(",", ".", df$ipk)
+df$ipk <- as.numeric(df$ipk)
+df$tempat_tinggal <- as.factor(df$tempat_tinggal)
+
+
+# 4. Statistik Pemusatan & Penyebaran KESELURUHAN (Tambahkan Modus)
+stats_overall <- df %>%
+  summarise(
+    jumlah = n(),
+    mean_ipk = mean(ipk, na.rm = TRUE),
+    median_ipk = median(ipk, na.rm = TRUE),
+    mode_ipk = get_mode(ipk), # <--- TAMBAHAN MODUS
+    sd_ipk = sd(ipk, na.rm = TRUE),
+    var_ipk = var(ipk, na.rm = TRUE)
+  )
+print("Statistik Keseluruhan (Mean, Median, Mode, SD):")
+print(stats_overall)
+
+
+# 5. Statistik Per Tempat Tinggal (Tambahkan Modus)
+stats_by_place <- df %>%
+  group_by(tempat_tinggal) %>%
+  summarise(
+    jumlah = n(),
+    mean_ipk = mean(ipk, na.rm = TRUE),
+    median_ipk = median(ipk, na.rm = TRUE),
+    mode_ipk = get_mode(ipk), # <--- TAMBAHAN MODUS
+    min_ipk = min(ipk, na.rm = TRUE),
+    max_ipk = max(ipk, na.rm = TRUE),
+    sd_ipk = sd(ipk, na.rm = TRUE),
+    var_ipk = var(ipk, na.rm = TRUE),
+    .groups = 'drop'
+  )
+print("Statistik Per Tempat Tinggal (Mean, Median, Mode, SD):")
+print(stats_by_place)
+
+
+
+# 6. VISUALISASI 
+
+# --- 6.1. BOX PLOT IPK per Tempat Tinggal (Wajib Eksplorasi Data) ---
+# Menggunakan tema Viridis/Dark2 untuk tampilan yang fokus
+plot_boxplot_ipk <- ggplot(df, aes(x = tempat_tinggal, y = ipk, fill = tempat_tinggal)) +
+  geom_boxplot(alpha = 0.8) +
+  scale_fill_brewer(palette = "Dark2") + # Palet Kekinian
+  theme_minimal(base_size = 11) +
+  labs(
+    title = "Distribusi IPK Berdasarkan Tempat Tinggal (Penyebaran & Outlier)",
+    x = "Jenis Tempat Tinggal",
+    y = "IPK"
+  ) +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, face = "bold"), # Rotasi Label
+    plot.title = element_text(face = "bold") # Judul lebih fokus
+  )
+print(plot_boxplot_ipk)
+
+
+# --- 6.2. BAR CHART RATA-RATA IPK (Wajib Ukuran Pemusatan) ---
+stats_mean_ordered <- stats_by_place %>%
+  mutate(tempat_tinggal = reorder(tempat_tinggal, mean_ipk))
+
+plot_mean_ipk <- ggplot(stats_mean_ordered, aes(x = tempat_tinggal, y = mean_ipk, fill = tempat_tinggal)) +
+  geom_col(alpha = 0.8) +
+  scale_fill_brewer(palette = "Set1") + # Palet Kekinian lainnya
+  theme_minimal(base_size = 10) +
+  labs(
+    title = "Perbandingan Rata-Rata IPK (Mean) per Tempat Tinggal",
+    x = "Jenis Tempat Tinggal",
+    y = "Rata-Rata IPK"
+  ) +
+  geom_text(aes(label = round(mean_ipk, 3)), vjust = -0.3, size = 3) + # Nilai di atas bar
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1), # Rotasi Label
+    plot.title = element_text(face = "bold")
+  )
+print(plot_mean_ipk)
+
+
+# 7. UJI HIPOTESIS (Uji-T Dua Populasi)
+df$tempat_tinggal <- trimws(df$tempat_tinggal)
+# Mengubah nama yang mungkin salah eja/terpotong menjadi standar:
+df$tempat_tinggal <- recode(df$tempat_tinggal, 
+                            "Tinggal bersama orangtua" = "Tinggal bersama orangtua",
+                            "Rumah mengontrak bersama-sama" = "Rumah mengontrak bersama-sama",
+                            .default = as.character(df$tempat_tinggal))
+
+
+group_asrama <- filter(df, tempat_tinggal == "Asrama")$ipk
+group_ortu <- filter(df, tempat_tinggal == "Tinggal bersama orangtua")$ipk 
+
+
+print("UJI-T (Asrama vs. Tinggal bersama orangtua) dimulai...")
+tryCatch({
+    t_test_result <- t.test(group_asrama, group_ortu, alternative = "two.sided", var.equal = FALSE)
+    print("HASIL Uji-T (Asrama vs. Tinggal bersama orangtua):")
+    print(t_test_result)
+}, error = function(e) {
+    print(paste("Gagal menjalankan Uji-T Asrama vs Orgtua. Error:", e$message))
+    print("Mencoba Uji-T Alternatif (Kos vs. Kontrak Bersama)...")
+
+    # --- OPSI B: UJI ALTERNATIF (Kos vs. Kontrak Bersama) ---
+    group_kos <- filter(df, tempat_tinggal == "Kos")$ipk
+    group_kontrak_bersama <- filter(df, tempat_tinggal == "Rumah mengontrak bersama-sama")$ipk
+
+    if (length(group_kos) > 1 && length(group_kontrak_bersama) > 1) {
+        t_test_result_alt <- t.test(group_kos, group_kontrak_bersama, alternative = "two.sided", var.equal = FALSE)
+        print("HASIL Uji-T Alternatif (Kos vs. Kontrak Bersama):")
+        print(t_test_result_alt)
+    } else {
+        print("Gagal: Tidak ada kelompok yang memiliki observasi yang cukup.")
+    }
+})
+```
+
