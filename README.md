@@ -9,7 +9,7 @@ Risa Romadona (124450127)
 Najwa Putri Yopu (124450123)
 
 ___________________________________________________________________________________________
-CARA MENJALANKAN SCRIPT
+* CARA MENJALANKAN SCRIPT
 
 Siapkan Struktur Folder
 Pastikan project memiliki folder:
@@ -44,7 +44,7 @@ Tekan Ctrl + Shift + Enter
 Maka seluruh proses—mulai dari pembersihan data, perhitungan statistik, visualisasi, hingga uji hipotesis—akan berjalan otomatis.
 _________________________________________________________________________________________________________________________________
 
-PAKET R YANG DIGUNAKAN 
+* PAKET R YANG DIGUNAKAN 
 
 dplyr – Untuk pembersihan data, transformasi kolom, dan perhitungan statistik deskriptif (mean, median, modus, sd, varians).
 
@@ -53,7 +53,7 @@ ggplot2 + RColorBrewer – Untuk visualisasi seperti boxplot dan bar chart denga
 readr – Untuk membaca CSV dengan encoding Latin1 agar data dapat terbaca tanpa error.
 __________________________________________________________________________________________________________________________________
 
-PENJELASAN SINGKAT DATASET
+* PENJELASAN SINGKAT DATASET
 
 Dataset ini merupakan hasil survei terhadap lebih dari 450 mahasiswa dan berisi berbagai informasi penting seperti IPK terakhir,
 jenis tempat tinggal (Asrama, Kos, Tinggal dengan Orangtua, Kontrakan, dan lainnya), jam belajar per minggu, pekerjaan serta pendapatan orang tua,
@@ -62,7 +62,7 @@ penyebaran IPK (mean, median, modus, standar deviasi, dan varians), membandingka
 bentuk eksplorasi data, serta melakukan uji hipotesis (uji-t) untuk mengetahui apakah terdapat perbedaan signifikan antar kelompok tempat tinggal tertentu.
 _____________________________________________________________________________________________________________________________________________________
 
-STRUKTUR REPOSITORY
+* STRUKTUR REPOSITORY
 
 data_ads : data yang belum di bersihkan 
 
