@@ -1,6 +1,7 @@
 TUGAS BESAR ANALISIS DATA STSTISTIKA KELOMPOK 11_RA:
 
 1.NAMA ANGGOTA:
+
 Della Ainisa Fitri (124450095)
 
 Risa Romadona (124450127) 
@@ -62,11 +63,17 @@ bentuk eksplorasi data, serta melakukan uji hipotesis (uji-t) untuk mengetahui a
 _____________________________________________________________________________________________________________________________________________________
 
 STRUKTUR REPOSITORY
+
 data_ads : data yang belum di bersihkan 
+
 data_11 : data yang sudah di bersihkan 
+
 code    : script R (kode_11_RA)
+
 output  : tabel & hasil uji 
+
 poster  : poster A1 (PDF)
+
 README.md  : dokumentasi proyek 
 
 
