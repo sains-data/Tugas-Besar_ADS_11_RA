@@ -55,7 +55,7 @@ ________________________________________________________________________________
 
 * PENJELASAN SINGKAT DATASET
 
-Dataset ini merupakan hasil survei terhadap lebih dari 450 mahasiswa dan berisi berbagai informasi penting seperti IPK terakhir,
+Dataset ini merupakan hasil survei terhadap lebih dari 300 mahasiswa dan berisi berbagai informasi penting seperti IPK terakhir,
 jenis tempat tinggal (Asrama, Kos, Tinggal dengan Orangtua, Kontrakan, dan lainnya), jam belajar per minggu, pekerjaan serta pendapatan orang tua,
 dan data demografis seperti jenis kelamin, tinggi badan, dan pendidikan terakhir. Analisis dilakukan untuk melihat ukuran pemusatan dan
 penyebaran IPK (mean, median, modus, standar deviasi, dan varians), membandingkan IPK berdasarkan jenis tempat tinggal, membuat visualisasi sebagai 
