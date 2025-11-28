@@ -5,48 +5,58 @@ Della Ainisa Fitri (124450095)
 Risa Romadona (124450127) 
 Najwa Putri Yopu (124450123)
 
-Cara Menjalankan Script
+___________________________________________________________________________________________
+CARA MENJALANKAN SCRIPT
 
-Pastikan struktur folder project sudah sesuai: /data/, /code/, /output/, /poster/, dan README.md.
+Siapkan Struktur Folder
+Pastikan project memiliki folder:
+/data/, /code/, /output/, /poster/, dan README.md.
 
-Masukkan dataset (misal: Book1.csv) ke dalam folder /data/.
+Masukkan Dataset
+Simpan file dataset kamu (misal: Book1.csv) ke dalam folder /data/.
 
-Buka file script analisis yang ada di folder /code/.
+Buka Script Analisis
+Masuk ke folder /code/, lalu buka file script R yang digunakan untuk analisis.
 
-Install semua paket yang diperlukan:
+Install Semua Paket yang Dibutuhkan
 
 install.packages(c("dplyr", "ggplot2", "readr", "RColorBrewer"))
 
 
-Sesuaikan file path dataset pada bagian pembacaan data:
+Atur Lokasi File Dataset (File Path)
+Pada bagian pembacaan data dalam script, sesuaikan path menjadi lokasi dataset kamu:
 
-df <- readr::read_csv("D:/TUGAS SEM 3/ADS/Book1.csv",
-                      locale = locale(encoding = "Latin1"))
+df <- readr::read_csv(
+  "D:/TUGAS SEM 3/ADS/Book1.csv",
+  locale = locale(encoding = "Latin1")
+)
 
 
-Jalankan seluruh script dari awal sampai akhir dengan menekan Run All
-atau menggunakan shortcut Ctrl + Shift + Enter.
+Jalankan Script dari Awal Sampai Akhir
 
-2. Paket R yang Digunakan
+Klik Run All di RStudio
+atau
+Tekan Ctrl + Shift + Enter
 
-dplyr – Membersihkan data, mengubah tipe kolom, dan menghitung statistik deskriptif (mean, median, modus, sd, varians).
+Maka seluruh proses—mulai dari pembersihan data, perhitungan statistik, visualisasi, hingga uji hipotesis—akan berjalan otomatis.
+_________________________________________________________________________________________________________________________________
 
-ggplot2 + RColorBrewer – Membuat visualisasi eksplorasi data seperti boxplot dan bar chart dengan palet warna estetik.
+PAKET R YANG DIGUNAKAN 
 
-readr – Membaca file CSV menggunakan encoding Latin1 sehingga dataset dapat terbaca tanpa error.
+dplyr – Untuk pembersihan data, transformasi kolom, dan perhitungan statistik deskriptif (mean, median, modus, sd, varians).
 
-3. Penjelasan Singkat Dataset
+ggplot2 + RColorBrewer – Untuk visualisasi seperti boxplot dan bar chart dengan palet warna yang modern dan estetik.
 
-Dataset berisi data survei mahasiswa dengan lebih dari 450 responden. Variabel penting yang dianalisis mencakup:
+readr – Untuk membaca CSV dengan encoding Latin1 agar data dapat terbaca tanpa error.
+__________________________________________________________________________________________________________________________________
 
-IPK terakhir mahasiswa
+PENJELASAN SINGKAT DATASET
 
-Jenis tempat tinggal (Asrama, Kos, Tinggal bersama orang tua, Kontrakan, dll.)
+Dataset ini merupakan hasil survei terhadap lebih dari 450 mahasiswa dan berisi berbagai informasi penting seperti IPK terakhir,
+jenis tempat tinggal (Asrama, Kos, Tinggal dengan Orangtua, Kontrakan, dan lainnya), jam belajar per minggu, pekerjaan serta pendapatan orang tua,
+dan data demografis seperti jenis kelamin, tinggi badan, dan pendidikan terakhir. Analisis dilakukan untuk melihat ukuran pemusatan dan
+penyebaran IPK (mean, median, modus, standar deviasi, dan varians), membandingkan IPK berdasarkan jenis tempat tinggal, membuat visualisasi sebagai 
+bentuk eksplorasi data, serta melakukan uji hipotesis (uji-t) untuk mengetahui apakah terdapat perbedaan signifikan antar kelompok tempat tinggal tertentu.
 
-Jam belajar per minggu
 
-Pendidikan dan pekerjaan orang tua
 
-Pendapatan keluarga serta data demografis lainnya
-
-Analisis dilakukan untuk melihat ukuran pemusatan dan penyebaran IPK, membandingkan IPK antar jenis tempat tinggal, membuat visualisasi, serta melakukan uji hipotesis (uji-t).
